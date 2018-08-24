@@ -14,21 +14,20 @@ class Login extends CI_Controller{
 	public function process(){
 		$user = $this->input->post('user');
 		$pass = $this->input->post('pass');
-
+		// echo $user;
+		// echo $pass;
+		// die();
 		$where = array(
 			'user' => $user,
 			'pass' => $pass
 		);
-		$cek = $this->CodeModel->validasilogin('pbnclp2018_admin', $where)->num_rows();
-			if ($cek > 0) {
-				$data_session = array (
-			  		'user' => $user,
-			  		'status' => 'login'
-			);
-			$this->session->set_userdata($data_session);
-			redirect(base_url('Code/index'));
-		  } else {
-			echo "Login Failed";
+		$cek = $this->CodeModel->validasilogin($user, $pass);
+			if ($cek == true) {
+				redirect('Code/index');
+			
+		  }
+		   else {
+			redirect('Login/index');
 		  }
 
 		// if ($user=='admin' && $pass=='admin123') 
@@ -48,7 +47,7 @@ class Login extends CI_Controller{
 	public function logout()
 	{
 	    $this->session->sess_destroy();
-    	redirect(base_url('login'));
+    	redirect('Login/index');
 	}
 }
 

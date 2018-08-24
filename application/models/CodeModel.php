@@ -30,15 +30,18 @@ class CodeModel extends CI_Model
 		$sql = $this->db->query("delete from pbnclp2018_voucher where id =  ". $id);
 	}
 
-	public function validasilogin()
+	public function validasilogin($user, $pass)
 	{
-		if($user == $_POST['user'] && $pass == $_POST['pass'])
+		$query = "select * from pbnclp2018_admin where username = '".$user."' AND password = '".$pass."' ";
+		$login = $this->db->query($query);
+		// print_r($login->num_rows());
+		// die();
+		if($login->num_rows() >= 1 )
 		{
-			redirect('Code/index');
+			return true;
 		}
 		else{
-			echo "Login failed";
-			redirect('Login/index');
+			return false;
 		}
 	}
 }

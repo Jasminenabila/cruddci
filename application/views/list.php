@@ -58,6 +58,7 @@
 				<?php endforeach ?>
 			</tbody>
 		</table>
+		<a href="<?php echo site_url('Login/logout');?>" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Keluar</a>
 	</div>
 </div>
 </body>
